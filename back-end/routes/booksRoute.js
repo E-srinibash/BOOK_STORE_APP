@@ -55,7 +55,7 @@ router.put("/:id",async (req,res)=>{
             !req.body.author ||
             !req.body.publishYear){
                return res.status(400).send({
-                message: "SSend all required fields:title, author, piblishYear"
+                message: "Send all required fields:title, author, piblishYear"
                }) 
             }
                const {id} = req.params;
@@ -77,10 +77,10 @@ router.delete("/:id",async (req,res)=>{
         const result = await Book.findByIdAndDelete(id);
 
         if(!result){
-            return response.status(404).json({message:"book not found"})
+            return res.status(404).json({message:"book not found"})
         }
 
-        return response.status(200).send({message:"book deleted successfully"})
+        return res.status(200).send({message:"book deleted successfully"})
         
     } catch (error) {
         console.log(error.message);

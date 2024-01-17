@@ -9,18 +9,16 @@ dotenv.config()
 const app = express();
 const PORT = process.env.PORT || 3000
 app.use(express.json())
-
+app.use(cors(
+  { origin:"http://localhost:5173"}
+ ));
 
 app.get("/",(req,res)=>{
     res.send("welcome to Book-store-Project");
 })
 
 app.use("/books",booksRoute);
-app.use(cors({
-  origin:"http://localhost:3000",
-  methods:["GET","POST","PUT","DELETE"],
-  allowedHeaders:["Content-Type"]
-}));
+
 mongoose.connect(process.env.MONGODB_URL)
 .then(()=>{
   console.log("App connected to database");
